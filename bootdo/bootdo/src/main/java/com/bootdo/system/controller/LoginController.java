@@ -10,7 +10,6 @@ import com.bootdo.common.utils.R;
 import com.bootdo.common.utils.ShiroUtils;
 import com.bootdo.system.domain.MenuDO;
 import com.bootdo.system.service.MenuService;
-import io.swagger.models.auth.In;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -23,26 +22,25 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import java.util.List;
 
 @Controller
 public class LoginController extends BaseController {
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
-
 	@Autowired
 	MenuService menuService;
 	@Autowired
 	FileService fileService;
 	@GetMapping({ "/", "" })
 	String welcome(Model model) {
-
-		return "redirect:/blog";
+		//直接跳转到登陆页面
+		return "redirect:/index";
 	}
 
 	@Log("请求访问主页")
 	@GetMapping({ "/index" })
 	String index(Model model) {
+		//操作菜单选项
 		List<Tree<MenuDO>> menus = menuService.listMenuTree(getUserId());
 		model.addAttribute("menus", menus);
 		model.addAttribute("name", getUser().getName());
@@ -69,7 +67,6 @@ public class LoginController extends BaseController {
 	@PostMapping("/login")
 	@ResponseBody
 	R ajaxLogin(String username, String password) {
-
 		password = MD5Utils.encrypt(username, password);
 		UsernamePasswordToken token = new UsernamePasswordToken(username, password);
 		Subject subject = SecurityUtils.getSubject();

@@ -12,7 +12,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * @author bootdo 1992lcg@163.com
  * @version V1.0
  */
 public class RedisSessionDAO extends AbstractSessionDAO {
@@ -96,7 +95,6 @@ public class RedisSessionDAO extends AbstractSessionDAO {
 
     /**
      * 获得byte[]型的key
-     * @param key
      * @return
      */
     private byte[] getByteKey(Serializable sessionId){

@@ -43,10 +43,9 @@ public class UserRealm extends AuthorizingRealm {
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
 		String username = (String) token.getPrincipal();
-		Map<String, Object> map = new HashMap<>(16);
+		Map<String, Object> map = new HashMap<String, Object>(16);
 		map.put("username", username);
 		String password = new String((char[]) token.getCredentials());
-
 		UserDao userMapper = ApplicationContextRegister.getBean(UserDao.class);
 		// 查询用户信息
 		UserDO user = userMapper.list(map).get(0);

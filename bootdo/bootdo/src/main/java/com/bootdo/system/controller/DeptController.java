@@ -1,5 +1,4 @@
 package com.bootdo.system.controller;
-
 import com.bootdo.common.config.Constant;
 import com.bootdo.common.controller.BaseController;
 import com.bootdo.common.domain.Tree;
@@ -12,17 +11,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 /**
  * 部门管理
- * 
- * @author chglee
- * @email 1992lcg@163.com
- * @date 2017-09-27 14:40:36
+ *
  */
 
 @Controller
@@ -43,7 +38,7 @@ public class DeptController extends BaseController {
 	@GetMapping("/list")
 	@RequiresPermissions("system:sysDept:sysDept")
 	public List<DeptDO> list() {
-		Map<String, Object> query = new HashMap<>(16);
+		Map<String, Object> query = new HashMap<String, Object>(16);
 		List<DeptDO> sysDeptList = sysDeptService.list(query);
 		return sysDeptList;
 	}

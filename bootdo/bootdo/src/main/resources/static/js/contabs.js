@@ -142,12 +142,11 @@ $(function () {
             $('.J_mainContent').find('iframe.J_iframe').hide().parents('.J_mainContent').append(str1);
 
             //显示loading提示
-//            var loading = layer.load();
-//
-//            $('.J_mainContent iframe:visible').load(function () {
-//                //iframe加载完成后隐藏loading提示
-//                layer.close(loading);
-//            });
+           var loading = layer.load();
+           $('.J_mainContent iframe:visible').load(function () {
+                //iframe加载完成后隐藏loading提示
+                layer.close(loading);
+            });
             // 添加选项卡
             $('.J_menuTabs .page-tabs-content').append(str);
             scrollToTab($('.J_menuTab.active'));
@@ -156,38 +155,30 @@ $(function () {
     }
 
     $('.J_menuItem').on('click', menuItem);
-
     // 关闭选项卡菜单
     function closeTab() {
         var closeTabId = $(this).parents('.J_menuTab').data('id');
         var currentWidth = $(this).parents('.J_menuTab').width();
-
         // 当前元素处于活动状态
         if ($(this).parents('.J_menuTab').hasClass('active')) {
-
             // 当前元素后面有同辈元素，使后面的一个元素处于活动状态
             if ($(this).parents('.J_menuTab').next('.J_menuTab').size()) {
-
                 var activeId = $(this).parents('.J_menuTab').next('.J_menuTab:eq(0)').data('id');
                 $(this).parents('.J_menuTab').next('.J_menuTab:eq(0)').addClass('active');
-
                 $('.J_mainContent .J_iframe').each(function () {
                     if ($(this).data('id') == activeId) {
                         $(this).show().siblings('.J_iframe').hide();
                         return false;
                     }
                 });
-
                 var marginLeftVal = parseInt($('.page-tabs-content').css('margin-left'));
                 if (marginLeftVal < 0) {
                     $('.page-tabs-content').animate({
                         marginLeft: (marginLeftVal + currentWidth) + 'px'
                     }, "fast");
                 }
-
                 //  移除当前选项卡
                 $(this).parents('.J_menuTab').remove();
-
                 // 移除tab对应的内容区
                 $('.J_mainContent .J_iframe').each(function () {
                     if ($(this).data('id') == closeTabId) {
@@ -278,12 +269,12 @@ $(function () {
     function refreshTab() {
         var target = $('.J_iframe[data-id="' + $(this).data('id') + '"]');
         var url = target.attr('src');
-//        //显示loading提示
-//        var loading = layer.load();
-//        target.attr('src', url).load(function () {
-//            //关闭loading提示
-//            layer.close(loading);
-//        });
+       //显示loading提示
+        var loading = layer.load();
+        target.attr('src', url).load(function () {
+            //关闭loading提示
+            layer.close(loading);
+        });
     }
 
     $('.J_menuTabs').on('dblclick', '.J_menuTab', refreshTab);
